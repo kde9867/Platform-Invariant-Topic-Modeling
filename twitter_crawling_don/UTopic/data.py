@@ -45,30 +45,13 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-class newsData():
-    def __init__(self):
-        self.dataset = fetch_20newsgroups(remove=('headers', 'footers', 'quotes'))
-        self.data = self.dataset.data
-        self.targets = self.dataset.target
-        
-        idx = 0
-        target_filtered = []
-        for text in self.data:
-            if len(text) > 0:
-                target_filtered.append(idx)
-            idx += 1
-            
-        self.target_filtered = self.targets[target_filtered]
-        self.feature_labels = torch.tensor(self.target_filtered)
-
-
 class TwitterDataset(Dataset):
-    def __init__(self, path='text_preprocess.csv', sample_size=30000):
+    def __init__(self, path='text_preprocess.csv', sample_size=100000):
         self.df = pd.read_csv(path, lineterminator="\n")
         self.df = self.df.sample(n=sample_size, random_state=42)
         
         self.texts = self.df['content'].tolist()
-        self.targets = torch.arange(len(self.texts), dtype=torch.long)  # 각 text에 대한 index를 target으로 사용
+        self.targets = torch.arange(len(self.texts), dtype=torch.long)  
 
     def __len__(self):
         return len(self.texts)
@@ -78,9 +61,9 @@ class TwitterDataset(Dataset):
 
 
 class RedditDataset(Dataset):
-    def __init__(self, path='reddit_total_preprocessed_cleaned.csv', sample_size=30000):
+    def __init__(self, path='reddit_total_preprocessed_cleaned.csv', sample_size=100000):
         self.df = pd.read_csv(path)
-        self.df = self.df.sample(n=sample_size, random_state=42)  # 무작위로 10만개의 샘플 선택
+        self.df = self.df.sample(n=sample_size, random_state=42)  
         self.texts = self.df['preprocessed_text'].tolist()
         self.targets = torch.arange(len(self.texts), dtype=torch.long) 
         
@@ -91,9 +74,9 @@ class RedditDataset(Dataset):
 
 
 class YoutubeDataset(Dataset):
-    def __init__(self, path='testVideoMetaDataResult_Pre.csv', sample_size=30000):
+    def __init__(self, path='testVideoMetaDataResult_Pre.csv', sample_size=100000):
         self.df = pd.read_csv(path)
-        self.df = self.df.sample(n=sample_size, random_state=42)  # 무작위로 10만개의 샘플 선택
+        self.df = self.df.sample(n=sample_size, random_state=42)  
         self.texts = self.df['comment_Text'].tolist()
         self.targets = torch.arange(len(self.texts), dtype=torch.long) 
         
@@ -104,55 +87,6 @@ class YoutubeDataset(Dataset):
         return self.texts[idx], self.targets[idx]
 
 
-    
-class nipsAbstractData():
-    def __init__(self, path="./data/papers.csv"):
-        df = pd.read_csv(path)
-        df = df[df['abstract'] != 'Abstract Missing']
-        self.data = df['abstract'].to_list()
-        
-
-class stackoverflowData():
-    def __init__(self, path="./data/stack_overflow.csv"):
-        df = pd.read_csv(path)
-        self.data = df['title'].to_list()
-        
-        
-class twitterData():
-    def __init__(self, path='./data/twitter_covid19.tsv'):
-        df = pd.read_csv(path, sep='\t', lineterminator='\n', header=None, names=['data'])
-        self.data = df['data'].to_list()
-        
-        
-class nipsData():
-    def __init__(self, path="./data/papers.csv"):
-        df = pd.read_csv(path)
-        self.data = df['title'].to_list()
-
-        
-class wikiData():
-    def __init__(self, path="./data/smplAbstracts/"):
-        path_list = glob.glob(path + '*.txt')
-        self.data = []
-        for path in path_list:
-            f = open(path, 'r')
-            lines = f.readline()
-            self.data.append(lines)
-            f.close()
-
-            
-class reutersData():
-    def __init__(self, path):
-        self.data = []
-        with open(path, 'r') as f:
-            for line in f:
-                self.data.append(line)
-
-class r52Data():
-    def __init__(self, path):
-        self.data = pd.read_csv(path + 'r52-merged-text.txt', header=None)[0].values.tolist()
-        self.targets = pd.read_csv(path + 'r52-merged-label.txt', header=None)
-        
 
 class BertDataset(Dataset):
     def __init__(self, bert, text_list, N_word, vectorizer=None, lemmatize=False):
