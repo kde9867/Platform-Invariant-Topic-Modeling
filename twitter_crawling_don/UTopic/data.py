@@ -49,8 +49,7 @@ class TwitterDataset(Dataset):
     def __init__(self, path='text_preprocess.csv', sample_size=100000):
         self.df = pd.read_csv(path, lineterminator="\n")
         self.df = self.df.sample(n=sample_size, random_state=42)
-        self.df.dropna(subset=['content'], inplace=True)
-
+        
         self.texts = self.df['content'].tolist()
         self.targets = torch.arange(len(self.texts), dtype=torch.long)  
 
@@ -65,8 +64,6 @@ class RedditDataset(Dataset):
     def __init__(self, path='reddit_total_preprocessed_cleaned.csv', sample_size=100000):
         self.df = pd.read_csv(path)
         self.df = self.df.sample(n=sample_size, random_state=42)  
-        self.df.dropna(subset=['preprocessed_text'], inplace=True)
-
         self.texts = self.df['preprocessed_text'].tolist()
         self.targets = torch.arange(len(self.texts), dtype=torch.long) 
         
@@ -80,8 +77,6 @@ class YoutubeDataset(Dataset):
     def __init__(self, path='testVideoMetaDataResult_Pre.csv', sample_size=100000):
         self.df = pd.read_csv(path)
         self.df = self.df.sample(n=sample_size, random_state=42)  
-        self.df.dropna(subset=['comment_Text'], inplace=True)
-
         self.texts = self.df['comment_Text'].tolist()
         self.targets = torch.arange(len(self.texts), dtype=torch.long) 
         
