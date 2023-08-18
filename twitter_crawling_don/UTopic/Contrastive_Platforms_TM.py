@@ -294,6 +294,9 @@ first_batches = create_single_batch_dataloaders([twitter_ds, reddit_ds, youtube_
 
 platform_names = ["Twitter", "Reddit", "YouTube"]
 
+all_texts = twitter_ds.texts + reddit_ds.texts + youtube_ds.texts
+
+# 병합된 데이터를 기반으로 BoW 행렬 생성
 for idx, batch in enumerate(first_batches):
     texts, targets = batch
     print(f"Platform: {platform_names[idx]}")
@@ -301,13 +304,13 @@ for idx, batch in enumerate(first_batches):
     print("Sample Index:", targets[0])
     print('-' * 50)
     
-    # BoW 매트릭스 생성 및 크기 출력
-    bow_matrix_batch, tf_matrix_full = process_text_data(texts, twitter_ds.texts)
+    # 병합된 all_texts를 사용하여 BoW 매트릭스 생성 및 크기 출력
+    bow_matrix_batch, tf_matrix_full = process_text_data(texts, all_texts)
     print(f"{platform_names[idx]} BoW matrix batch size: {bow_matrix_batch.shape}")
     print(f"{platform_names[idx]} BoW matrix full size: {tf_matrix_full.shape}")
     print('-' * 50)
     
-    positive_samples = compute_bow_batchwise(texts, twitter_ds.texts)
+    positive_samples = compute_bow_batchwise(texts, all_texts)
     print("Positive sample for first text in batch:", positive_samples[0])
     print('-' * 50)
 
