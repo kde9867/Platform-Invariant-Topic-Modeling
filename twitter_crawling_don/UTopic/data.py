@@ -46,7 +46,7 @@ warnings.filterwarnings("ignore")
 
 
 class TwitterDataset(Dataset):
-    def __init__(self, path='text_preprocess.csv', sample_size=100000):
+    def __init__(self, path='text_preprocess.csv', sample_size=50000):
         self.df = pd.read_csv(path, lineterminator="\n")
         self.df = self.df.sample(n=sample_size, random_state=42)
         self.df.dropna(subset=['content'], inplace=True)
@@ -62,7 +62,7 @@ class TwitterDataset(Dataset):
 
 
 class RedditDataset(Dataset):
-    def __init__(self, path='reddit_total_preprocessed_cleaned.csv', sample_size=100000):
+    def __init__(self, path='reddit_total_preprocessed_cleaned.csv', sample_size=50000):
         self.df = pd.read_csv(path)
         self.df = self.df.sample(n=sample_size, random_state=42)  
         self.df.dropna(subset=['preprocessed_text'], inplace=True)
@@ -77,7 +77,7 @@ class RedditDataset(Dataset):
 
 
 class YoutubeDataset(Dataset):
-    def __init__(self, path='testVideoMetaDataResult_Pre.csv', sample_size=100000):
+    def __init__(self, path='testVideoMetaDataResult_Pre.csv', sample_size=50000):
         self.df = pd.read_csv(path)
         self.df = self.df.sample(n=sample_size, random_state=42)  
         self.df.dropna(subset=['comment_Text'], inplace=True)
