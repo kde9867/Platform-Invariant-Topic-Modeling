@@ -46,12 +46,11 @@ warnings.filterwarnings("ignore")
 
 
 class TwitterDataset(Dataset):
-    def __init__(self, path='text_preprocess.csv', sample_size=100000):
-        self.df = pd.read_csv(path, lineterminator="\n")
-        self.df = self.df.sample(n=sample_size, random_state=42)
-        self.df.dropna(subset=['content'], inplace=True)
+    def __init__(self, path='twitter_total_preprocessed.csv', sample_size=100000):
+        self.df = pd.read_csv(path, lineterminator="\n").dropna(subset=['content'])
+        self.df = self.df.sample(n=min(sample_size, len(self.df)), random_state=42)
 
-        self.texts = self.df['content'].tolist()
+        self.texts = [str(text) for text in self.df['content'].tolist() if text.strip() != ""]
         self.targets = torch.arange(len(self.texts), dtype=torch.long)  
 
     def __len__(self):
@@ -60,31 +59,28 @@ class TwitterDataset(Dataset):
     def __getitem__(self, idx):
         return self.texts[idx], self.targets[idx]
 
-
 class RedditDataset(Dataset):
     def __init__(self, path='reddit_total_preprocessed_cleaned.csv', sample_size=100000):
-        self.df = pd.read_csv(path)
-        self.df = self.df.sample(n=sample_size, random_state=42)  
-        self.df.dropna(subset=['preprocessed_text'], inplace=True)
+        self.df = pd.read_csv(path).dropna(subset=['preprocessed_text'])
+        self.df = self.df.sample(n=min(sample_size, len(self.df)), random_state=42)
 
-        self.texts = self.df['preprocessed_text'].tolist()
+        self.texts = [str(text) for text in self.df['preprocessed_text'].tolist() if text.strip() != ""]
         self.targets = torch.arange(len(self.texts), dtype=torch.long) 
-        
+
     def __len__(self):
         return len(self.texts)
+
     def __getitem__(self, idx):
         return self.texts[idx], self.targets[idx]
 
-
 class YoutubeDataset(Dataset):
-    def __init__(self, path='testVideoMetaDataResult_Pre.csv', sample_size=100000):
-        self.df = pd.read_csv(path)
-        self.df = self.df.sample(n=sample_size, random_state=42)  
-        self.df.dropna(subset=['comment_Text'], inplace=True)
+    def __init__(self, path='youtube_preprocessed.csv', sample_size=100000):
+        self.df = pd.read_csv(path).dropna(subset=['comment_Text'])
+        self.df = self.df.sample(n=min(sample_size, len(self.df)), random_state=42)
 
-        self.texts = self.df['comment_Text'].tolist()
+        self.texts = [str(text) for text in self.df['comment_Text'].tolist() if text.strip() != ""]
         self.targets = torch.arange(len(self.texts), dtype=torch.long) 
-        
+
     def __len__(self):
         return len(self.texts)
 
