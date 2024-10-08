@@ -16,7 +16,7 @@ For this study, data was collected directly from three platforms: X, Reddit, and
 
 `PITopic.ipynb` is the main notebook for training and evaluating the model. This code contains a platform-invariant contrastive learning algorithm and removes platform-specific jargon word sets.
 
-![Main Model](Platform-Invariant-Topic-Modeling/image/PITopic_main_model.jpg)
+![PITopic_main_model](https://github.com/user-attachments/assets/07b31cfe-39c8-40b3-8fc4-eac67844cbc0)
 
 
 This research enhances the potential for robust social analysis across diverse platforms by contributing to more accurate and unbiased topic discovery.
