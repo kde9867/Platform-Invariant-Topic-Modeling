@@ -1,7 +1,7 @@
 # Platform-Invariant Topic Modeling via Contrastive Learning to Mitigate Platform-Induced Bias
 
 
-Implementation of Platform-Invariant Topic Modeling. You can discover the original paper “Platform-Invariant Topic Modeling via Contrastive Learning to Mitigate Platform-Induced Bias” at the following link:
+Implementation of Platform-Invariant Topic Modeling. 
 
 This study enhances the performance of topic models by developing a platform-invariant contrastive learning algorithm and eliminating platform-specific jargon sets to minimize the unique influence of each platform.
 
@@ -9,10 +9,14 @@ This study enhances the performance of topic models by developing a platform-inv
 
 For this study, data was collected directly from three platforms: X, Reddit, and YouTube, respectively. You can find three datasets in the sub-directory named `data`. Each file is raw data collected from three platforms (X, Reddit, YouTube) using the keyword “ChatGPT”. You can utilize this data when implementing the PITopic.
 
+![Data Overview](Platform-Invariant-Topic-Modeling/image/Data.png)
 
 ## Usage
 
 `PITopic.ipynb` is the main notebook for training and evaluating the model. This code contains a platform-invariant contrastive learning algorithm and removes platform-specific jargon word sets.
+
+![Main Model](Platform-Invariant-Topic-Modeling/image/PITopic_main_model.jpg)
+
 
 This research enhances the potential for robust social analysis across diverse platforms by contributing to more accurate and unbiased topic discovery.
 
