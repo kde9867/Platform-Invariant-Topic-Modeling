@@ -20,6 +20,28 @@ For this study, data was collected directly from three platforms: X, Reddit, and
 
 
 This research enhances the potential for robust social analysis across diverse platforms by contributing to more accurate and unbiased topic discovery.
+## How to Run
+
+To reproduce the results from the real-world data shown in Table 3 of the paper, follow the steps below:
+
+### Data Setup
+Replace the paths for the three collected platform data CSV files (`data/twitter_total_preprocessed.csv`, `data/reddit_total_preprocessed_cleaned.csv`, `data/youtube_preprocessed.csv`) in the code with the paths where your data is stored.
+
+    1. Setting the path of the model codes in PITopic.ipynb.
+     (i.e., The location of the two codes that upload the data required for PITopic models and organize the structure of PITopic are “/models/data.py” and “/models/model.py”, respectively, which can be set to “models” in PITopic.ipynb.)
+    2. python PITopic.ipynb -- After completing the first step, you can run PITopic.ipynb to see the topics extracted by the model. 
+
+
+## How to Evaluate
+
+    1. In order to quantitatively analyze the topic words extracted by the model, we can measure the topic coherence using the code located in “models/coherence.py”. 
+    The measures we used are Mutual Information, Topic Fiversity, and Topic coherence (NPMI, UCI). 
+
+The average of NPMI and UCI was calculated for each platform separately, as well as across all platforms collectively. NPMI quantifies the frequency of word co-occurrence within a specific topic, while UCI assesses the frequency of topic co-occurrence across various documents; higher values indicate better topic coherence.
+PITopic demonstrates good performance across all measures of topic coherence(see the below example result).
+
+<img width="842" alt="evaluation-over-real-world" src="https://github.com/user-attachments/assets/14b0eb92-115b-4919-a38b-dd3c15b17191">
+
 
 ## Requirements
 
