@@ -50,3 +50,5 @@ PITopic demonstrates good performance across all measures of topic coherence(see
 - `pandas == 2.2.2`
 - `scikit-learn == 1.3.2`
 - `gensim == 4.2.0`
+
+Should you have any questions or comments, please contact us at the following email address: ms4563321@gmail.com, kde9867@gmail.com
