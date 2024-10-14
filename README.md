@@ -22,7 +22,7 @@ For this study, data was collected directly from three platforms: X, Reddit, and
 This research enhances the potential for robust social analysis across diverse platforms by contributing to more accurate and unbiased topic discovery.
 ## How to Run
 
-To reproduce the results from the real-world data shown in Table 3 of the paper, follow the steps below:
+To reproduce the results from the real-world data shown in the paper, follow the steps below:
 
 ### Data Setup
 Replace the paths for the three collected platform data CSV files (`data/twitter_total_preprocessed.csv`, `data/reddit_total_preprocessed_cleaned.csv`, `data/youtube_preprocessed.csv`) in the code with the paths where your data is stored.
